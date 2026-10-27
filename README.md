@@ -10,6 +10,8 @@ their first order, growth depends on constantly acquiring new customers.
 - Retention stays **below 1%** in every monthly cohort (2017-2018).
 - Repeat customers are 3% of customers but **5.6%** of total payments (R$15.4M).
 - 14,404 "New Big Spenders" average ~R$302 per customer, about 4x "New Customers".
+![Overview](page1_overview.png)
+![Segments](page2_segments.png)
 
 ## Recommendations
 1. Test a second-purchase offer for New Big Spenders within 30-60 days of their first order.
@@ -19,12 +21,12 @@ their first order, growth depends on constantly acquiring new customers.
 ## Approach
 1. Loaded 4 Olist tables into BigQuery; used delivered orders only.
 2. Found that `customer_id` changes per order, so used `customer_unique_id`
- (93,357 customer_ids vs 2801 real customers in the Customers table.)
+ (99,441 customer_ids vs 96096 real customers in the Customers table.)
 3. Built monthly cohort retention (SQL) and RFM segmentation (6 segments).
 4. Made RFM scoring deterministic after noticing counts shifting between runs.
 5. Built a 3-page Looker Studio dashboard.
 
-**Live dashboard:**https://datastudio.google.com/reporting/9b7b1476-461e-47d0-853a-c7b12acc46d3
+Live dashboard: https://datastudio.google.com/reporting/9b7b1476-461e-47d0-853a-c7b12acc46d3
 
 **Data:** [Olist Brazilian E-Commerce Public Dataset (Kaggle)](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
 
