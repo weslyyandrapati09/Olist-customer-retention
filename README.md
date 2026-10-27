@@ -18,8 +18,8 @@ their first order, growth depends on constantly acquiring new customers.
 
 ## Approach
 1. Loaded 4 Olist tables into BigQuery; used delivered orders only.
-2. 2. Found that `customer_id` changes per order, so used `customer_unique_id`
- 93,357 customer_ids vs 2801 real customers in the Customers table.
+2. Found that `customer_id` changes per order, so used `customer_unique_id`
+ (93,357 customer_ids vs 2801 real customers in the Customers table.)
 3. Built monthly cohort retention (SQL) and RFM segmentation (6 segments).
 4. Made RFM scoring deterministic after noticing counts shifting between runs.
 5. Built a 3-page Looker Studio dashboard.
