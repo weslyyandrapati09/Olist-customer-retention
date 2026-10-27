@@ -25,6 +25,7 @@ their first order, growth depends on constantly acquiring new customers.
 5. Built a 3-page Looker Studio dashboard.
 
 **Live dashboard:**https://datastudio.google.com/reporting/9b7b1476-461e-47d0-853a-c7b12acc46d3
+
 **Data:** [Olist Brazilian E-Commerce Public Dataset (Kaggle)](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
 
 ## Limitations
