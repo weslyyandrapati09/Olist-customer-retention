@@ -1,48 +1,38 @@
-# Olist Customer Retention & RFM Analysis
+# Olist Customer Retention Analysis (Python)
 
-## Business problem
-Olist is a Brazilian e-commerce marketplace. If few customers return after
-their first order, growth depends on constantly acquiring new customers.
-**Question: how many customers come back, and which are worth keeping?**
+## Business question
+Only ~3% of Olist customers place a second order. Do late deliveries
+or poor reviews explain why customers don't come back?
+
+## Data
+Brazilian E-Commerce Public Dataset by Olist (Kaggle), ~100K orders
+(2016-2018). Tables used: orders, customers, order reviews.
+Link: https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
+
+## Method
+- Kept delivered orders (96,470) and calculated delay = actual vs estimated delivery date
+- Used customer_unique_id to identify real customers (customer_id changes per order)
+- One row per customer (93,350), judged by their FIRST order
+- Compared repeat-purchase rate by delivery timing and review score (pandas)
+- Checked group differences with 95% confidence intervals
 
 ## Key findings
-- Only **3.0%** of 93,357 customers placed a second order.
-- Retention stays **below 1%** in every monthly cohort (2017-2018).
-- Repeat customers are 3% of customers but **5.6%** of total payments (R$15.4M).
-- 14,404 "New Big Spenders" average ~R$302 per customer, about 4x "New Customers".
-![Overview](page1_overview.png)
-![Segments](page2_segments.png)
+1. Late delivery sharply lowers satisfaction: avg review 4.29 (early) -> 2.71 (1-7 days late) -> 1.69 (8+ days late).
+2. Late delivery is associated with a modest drop in repeat purchases: 2.47% vs 3.04%.
+3. Retention is low even for satisfied customers: 5-star reviewers return at only 3.12%.
 
 ## Recommendations
-1. Test a second-purchase offer for New Big Spenders within 30-60 days of their first order.
-2. Run it as an A/B test (offer vs no offer) before any rollout.
-3. Treat win-back of inactive one-timers as a small experiment, not a main bet.
-
-## Approach
-1. Loaded 4 Olist tables into BigQuery; used delivered orders only.
-2. Found that `customer_id` changes per order, so used `customer_unique_id`
- (99,441 customer_ids vs 96096 real customers in the Customers table.)
-3. Built monthly cohort retention (SQL) and RFM segmentation (6 segments).
-4. Made RFM scoring deterministic after noticing counts shifting between runs.
-5. Built a 3-page Looker Studio dashboard.
-
-Live dashboard: https://datastudio.google.com/reporting/9b7b1476-461e-47d0-853a-c7b12acc46d3
-
-**Data:** [Olist Brazilian E-Commerce Public Dataset (Kaggle)](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
+- Reduce late deliveries and set realistic delivery estimates
+- Proactively contact late-delivery customers (apology/voucher)
+- Invest in re-engagement (post-purchase emails, coupons, cross-category offers)
 
 ## Limitations
-About two years of data, one marketplace, no marketing/channel data,
-payments include freight, segment thresholds are my own design.
-Findings describe behaviour; they don't prove cause.
+- Shows association, not causation
+- ~2 years of data, so recent customers had little time to return
+- 616 customers left no review
+- Repeat rate uses each customer's first order only
 
-## Tools & skills practised
-BigQuery SQL (CTEs, window functions, cohort analysis), Looker Studio, RFM
+## Tools
+Python, pandas, matplotlib
 
-## Files
-- [`00_validation_checks.sql`](00_validation_checks.sql): data checks and the repeat-rate query
-- [`01_cohort_retention.sql`](01_cohort_retention.sql): monthly cohort retention table
-- [`02_rfm.sql`](02_rfm.sql): RFM scoring and segments
-- [Dashboard PDF](Olist_Customer_Retention_%26_RFM_Dashboard.pdf): all 3 dashboard pages
-
-## Next
-Python analysis: do late deliveries and low review scores reduce repeat purchase?
+![Charts](retention_charts.png)
