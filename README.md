@@ -1,4 +1,7 @@
 # Olist Customer Retention Analysis (Python)
+Part 1: SQL and BigQuery (cohorts, RFM) 
+Part 2: Python (why customers don’t return)
+https://datastudio.google.com/reporting/9b7b1476-461e-47d0-853a-c7b12acc46d3
 
 ## Business question
 Only ~3% of Olist customers place a second order. Do late deliveries
